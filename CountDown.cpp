@@ -1,10 +1,11 @@
 //
 //    FILE: CountDown.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
+// VERSION: 0.2.1
 // PURPOSE: CountDown library for Arduino
 //
 // HISTORY:
+// 0.2.1   2020-06-05 fix library.json
 // 0.2.0   2020-03-29 #pragma once, removed pre 1.0 support
 // 0.1.3 - 2017-07-16 TODO improved seconds - OdoMeter see below ... TODO 
 // 0.1.2 - 2017-07-16 added start(days, hours, minutes, seconds) + cont() == continue countdown
@@ -90,7 +91,7 @@ void CountDown::calcRemaining()
 // TODO
 // thanks to odometer - larger range
 // https://forum.arduino.cc/index.php?topic=356253.msg2456606#msg2456606
-// static uit32_t CountDown::seconds()
+// static uint32_t CountDown::seconds()
 // {
   // static uint32_t count = 0UL;
   // static uint32_t offset = 0UL;

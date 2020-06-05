@@ -9,7 +9,7 @@
 
 #include "Arduino.h"
 
-#define COUNTDOWN_LIB_VERSION "0.2.0"
+#define COUNTDOWN_LIB_VERSION "0.2.1"
 
 class CountDown
 {

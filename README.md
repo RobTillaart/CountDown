@@ -4,12 +4,12 @@ Arduino Library to implement a CountDown clock (in SW polling, no HW timer).
 ## Description
 The main functions of the CountDown clock are:
 
-* *void start(ticks);*
-* *void start(days, hours, minutes, seconds);*
-* *void stop();*
-* *void cont();*  (continue is a C-Keyword)*
-* *uint32_t remaining();*
-* *bool isRunning();*
+* **void start(ticks);**
+* **void start(days, hours, minutes, seconds);**
+* **void stop();**
+* **void cont();**  *(continue is a C-Keyword)*
+* **uint32_t remaining();**
+* **bool isRunning();**
 
 These functions work straightforward.
 
