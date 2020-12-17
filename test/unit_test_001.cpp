@@ -49,10 +49,10 @@ unittest(test_constructor)
   CountDown c(CountDown::MILLIS);
   CountDown d(CountDown::MICROS);
 
-  assertEqual(CountDOwn::MINUTES, a.resolution());
-  assertEqual(CountDOwn::SECONDS, b.resolution());
-  assertEqual(CountDOwn::MILLIS,  c.resolution());
-  assertEqual(CountDOwn::MICROS,  d.resolution());
+  assertEqual(CountDown::MINUTES, a.resolution());
+  assertEqual(CountDown::SECONDS, b.resolution());
+  assertEqual(CountDown::MILLIS,  c.resolution());
+  assertEqual(CountDown::MICROS,  d.resolution());
 
   assertFalse(a.isRunning());
   assertFalse(b.isRunning());
