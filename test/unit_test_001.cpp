@@ -82,6 +82,13 @@ unittest(test_run)
   cd.stop();
   assertFalse(cd.isRunning());
   assertEqual(5, cd.remaining());
+
+  cd.start(10);
+  assertTrue(cd.isRunning());
+  delay(15);
+  assertFalse(cd.isRunning());
+  assertEqual(0, cd.remaining());
+
 }
 
 unittest_main()
