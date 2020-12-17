@@ -74,7 +74,7 @@ void CountDown::cont()
   }
 }
 
-bool isRunning() 
+bool CountDown::isRunning() 
 {
   if (_state == CountDown::STOPPED) return false;
   if (remaining() == 0) return false;
