@@ -30,7 +30,7 @@ public:
     void cont();
 
     uint32_t remaining();
-    bool isRunning() const              { return _state == CountDown::RUNNING; };
+    bool isRunning();
     enum Resolution resolution() const  { return _res; };
 
 private:

@@ -74,6 +74,13 @@ void CountDown::cont()
   }
 }
 
+bool isRunning() 
+{
+  if (_state == CountDown::STOPPED) return false;
+  if (remaining() == 0) return false;
+  return true;
+}
+
 uint32_t CountDown::remaining()
 {
   calcRemaining();
@@ -103,6 +110,10 @@ void CountDown::calcRemaining()
         break;
     }
     _remaining = _ticks > t ? _ticks - t: 0;
+    if (_remaining == 0) 
+    {
+      _state == CountDown::STOPPED);
+    }
     return;
   }
   // do not change
