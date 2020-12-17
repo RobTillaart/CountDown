@@ -1,3 +1,9 @@
+
+
+[![Arduino CI](https://github.com/RobTillaart/CountDown/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/CountDown/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/RobTillaart/CountDown.svg?maxAge=3600)](https://github.com/RobTillaart/CountDown/releases)
+
 # CountDown
 
 Arduino Library to implement a CountDown clock (in SW polling, no HW timer).
@@ -6,13 +12,13 @@ Arduino Library to implement a CountDown clock (in SW polling, no HW timer).
 
 The main functions of the CountDown clock are:
 
-* **void start(ticks);**
-* **void start(days, hours, minutes, seconds);**
-* **void start(days, hours, minutes);**
-* **void stop();**
-* **void cont();**  *(continue is a C-Keyword)*
-* **uint32_t remaining();**
-* **bool isRunning();**
+- **void start(ticks);**
+- **void start(days, hours, minutes, seconds);**
+- **void start(days, hours, minutes);**
+- **void stop();**
+- **void cont();**  *(continue is a C-Keyword)*
+- **uint32_t remaining();**
+- **bool isRunning();**
 
 These functions work straightforward.
 
@@ -37,10 +43,10 @@ may not exceed 2\^32 millis  ~49 days
 The Countdown clock uses by default **millis()** to do the time keeping,
 although this can be changed runtime by **setResolution(res)**. The parameter 
 **res** can be:
-- *MICROS*
-- *MILLIS*
-- *SECONDS*  // based upon millis()
-- *MINUTES*  // based upon millis()
+- **MICROS**
+- **MILLIS**
+- **SECONDS**  // based upon millis()
+- **MINUTES**  // based upon millis()
 
 Although possible one should not change the resolution of the CountDown 
 clock while it is running as you mix up different timescales.
