@@ -76,12 +76,12 @@ unittest(test_run)
   assertEqual(CountDown::MILLIS,  cd.resolution());
 
   assertFalse(cd.isRunning());
-  a.start(10);
-  assertTrue(a.isRunning());
+  cd.start(10);
+  assertTrue(cd.isRunning());
   delay(5);
-  a.stop();
-  assertFalse(a.isRunning());
-  assertEqual(5, a.remaining());
+  cd.stop();
+  assertFalse(cd.isRunning());
+  assertEqual(5, cd.remaining());
 }
 
 unittest_main()
