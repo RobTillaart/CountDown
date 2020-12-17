@@ -112,7 +112,7 @@ void CountDown::calcRemaining()
     _remaining = _ticks > t ? _ticks - t: 0;
     if (_remaining == 0) 
     {
-      _state == CountDown::STOPPED);
+      _state = CountDown::STOPPED;
     }
     return;
   }
