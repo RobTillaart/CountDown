@@ -1,18 +1,19 @@
 //
 //    FILE: CountDown.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.2
+// VERSION: 0.2.3
 // PURPOSE: CountDown library for Arduino
 //     URL: https://github.com/RobTillaart/CountDown
 //
 // HISTORY:
-// 0.2.2    2020-07-08 add MINUTES; refactor
-// 0.2.1    2020-06-05 fix library.json
-// 0.2.0    2020-03-29 #pragma once, removed pre 1.0 support
-// 0.1.3    2017-07-16 TODO improved seconds - OdoMeter see below ... TODO 
-// 0.1.2    2017-07-16 added start(days, hours, minutes, seconds) + cont() == continue countdown
-// 0.1.1    2015-10-29 added start(h, m, s)
-// 0.1.0    2015-10-27 initial version
+// 0.2.3    2020-12-17  add arduino-ci + unit test
+// 0.2.2    2020-07-08  add MINUTES; refactor
+// 0.2.1    2020-06-05  fix library.json
+// 0.2.0    2020-03-29  #pragma once, removed pre 1.0 support
+// 0.1.3    2017-07-16  TODO improved seconds - OdoMeter see below ... TODO 
+// 0.1.2    2017-07-16  added start(days, hours, minutes, seconds) + cont() == continue countdown
+// 0.1.1    2015-10-29  added start(h, m, s)
+// 0.1.0    2015-10-27  initial version
 //
 
 #include "CountDown.h"
@@ -73,6 +74,13 @@ void CountDown::cont()
   }
 }
 
+bool CountDown::isRunning() 
+{
+  if (_state == CountDown::STOPPED) return false;
+  if (remaining() == 0) return false;
+  return true;
+}
+
 uint32_t CountDown::remaining()
 {
   calcRemaining();
@@ -102,6 +110,10 @@ void CountDown::calcRemaining()
         break;
     }
     _remaining = _ticks > t ? _ticks - t: 0;
+    if (_remaining == 0) 
+    {
+      _state = CountDown::STOPPED;
+    }
     return;
   }
   // do not change
