@@ -69,10 +69,11 @@ unittest(test_constructor)
   assertFalse(c.isRunning());
 }
 
+
 unittest(test_run)
 {
   CountDown cd(CountDown::MILLIS);
-  assertEqual(CountDOwn::MILLIS,  cd.resolution());
+  assertEqual(CountDown::MILLIS,  cd.resolution());
 
   assertFalse(cd.isRunning());
   a.start(10);
