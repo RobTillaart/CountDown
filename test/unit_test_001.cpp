@@ -95,7 +95,7 @@ unittest(test_run)
 
 unittest(test_overflow)
 {
-  CountDown cd();
+  CountDown cd;
   assertEqual(CountDown::MILLIS,  cd.resolution());
 
   assertFalse(cd.isRunning());
