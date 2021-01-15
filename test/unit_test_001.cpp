@@ -63,14 +63,20 @@ unittest(test_constructor)
   assertFalse(e.isRunning());
 
   fprintf(stderr, "\nbase\n");
+  
+  a.setResolution(CountDown::SECONDS);
   assertTrue(a.start(10));
   assertTrue(a.isRunning());
+
   a.stop();
   assertFalse(a.isRunning());
+
   a.cont();
   assertTrue(a.isRunning());
+
   a.stop();
   assertFalse(a.isRunning());
+
   assertTrue(a.start(0));
   assertFalse(a.isRunning());
 }

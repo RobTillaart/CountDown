@@ -96,9 +96,8 @@ void CountDown::cont()
 
 bool CountDown::isRunning() 
 {
-  if (_state == CountDown::STOPPED) return false;
-  if (remaining() == 0) return false;
-  return true;
+  calcRemaining();
+  return (_state == CountDown::RUNNING);
 }
 
 

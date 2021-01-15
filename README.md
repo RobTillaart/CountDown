@@ -4,9 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/CountDown/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/RobTillaart/CountDown.svg?maxAge=3600)](https://github.com/RobTillaart/CountDown/releases)
 
+
 # CountDown
 
 Arduino Library to implement a CountDown clock (in SW polling, no HW timer).
+
 
 ## Description
 
