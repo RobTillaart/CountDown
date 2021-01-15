@@ -46,7 +46,7 @@ bool CountDown::start(uint32_t ticks)
   {
     _starttime = millis();
   }
-  returns true;  // can not overflow
+  return true;  // can not overflow
 }
 
 
