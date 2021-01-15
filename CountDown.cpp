@@ -53,7 +53,7 @@ bool CountDown::start(uint32_t ticks)
 bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds)
 {
   float _days = seconds / 86400.0 + minutes / 1440.0 + hours / 24.0 + days; 
-  bool rv = (_days > 49.7102696);
+  bool rv = (_days < 49.7102696);
 
   uint32_t ticks = 86400UL * days + 3600UL * hours + 60UL * minutes + seconds;
   if (ticks > 4294967) ticks = 4294967;  // prevent underlying millis() overflow
@@ -67,7 +67,7 @@ bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t s
 bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes)
 {
   float _days = minutes / 1440.0 + hours / 24.0 + days; 
-  bool rv = (_days > 49.7102696);
+  bool rv = (_days < 49.7102696);
 
   uint32_t ticks = 86400UL * days + 3600UL * hours + 60UL * minutes;
   if (ticks > 4294967) ticks = 4294967;  // prevent underlying millis() overflow
