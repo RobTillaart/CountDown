@@ -40,6 +40,8 @@ unittest_teardown()
 
 unittest(test_constructor)
 {
+  fprintf(stderr, "VERSION: %s\n", COUNTDOWN_LIB_VERSION);
+  
   CountDown a(CountDown::MINUTES);
   CountDown b(CountDown::SECONDS);
   CountDown c(CountDown::MILLIS);
