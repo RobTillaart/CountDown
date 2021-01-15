@@ -54,7 +54,7 @@ unittest(test_constructor)
   assertEqual(CountDown::MICROS,  d.resolution());
   assertEqual(CountDown::MILLIS,  e.resolution());
 
-  fprintf(stderr, "\nIisRunning");
+  fprintf(stderr, "\nisRunning\n");
 
   assertFalse(a.isRunning());
   assertFalse(b.isRunning());
@@ -62,8 +62,8 @@ unittest(test_constructor)
   assertFalse(d.isRunning());
   assertFalse(e.isRunning());
 
-  fprintf(stderr, "\nbase");
-  a.start(10);
+  fprintf(stderr, "\nbase\n");
+  assertTrue(a.start(10));
   assertTrue(a.isRunning());
   a.stop();
   assertFalse(a.isRunning());
@@ -71,7 +71,7 @@ unittest(test_constructor)
   assertTrue(a.isRunning());
   a.stop();
   assertFalse(a.isRunning());
-  a.start(0);
+  assertTrue(a.start(0));
   assertFalse(a.isRunning());
 }
 
