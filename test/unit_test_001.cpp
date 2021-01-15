@@ -44,7 +44,7 @@ unittest(test_constructor)
   CountDown b(CountDown::SECONDS);
   CountDown c(CountDown::MILLIS);
   CountDown d(CountDown::MICROS);
-  CountDown e();  // default MILLIS
+  CountDown e;  // default MILLIS
 
   assertEqual(CountDown::MINUTES, a.resolution());
   assertEqual(CountDown::SECONDS, b.resolution());
