@@ -1,22 +1,24 @@
 //
 //    FILE: CountDown.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.3
+// VERSION: 0.2.4
 // PURPOSE: CountDown library for Arduino
 //     URL: https://github.com/RobTillaart/CountDown
 //
-// HISTORY:
-// 0.2.3    2020-12-17  add arduino-ci + unit test
-// 0.2.2    2020-07-08  add MINUTES; refactor
-// 0.2.1    2020-06-05  fix library.json
-// 0.2.0    2020-03-29  #pragma once, removed pre 1.0 support
-// 0.1.3    2017-07-16  TODO improved seconds - OdoMeter see below ... TODO 
-// 0.1.2    2017-07-16  added start(days, hours, minutes, seconds) + cont() == continue countdown
-// 0.1.1    2015-10-29  added start(h, m, s)
-// 0.1.0    2015-10-27  initial version
-//
+//  HISTORY:
+//  0.2.4   2021-01-15  start detect overflow now.
+//  0.2.3   2020-12-17  add arduino-ci + unit test
+//  0.2.2   2020-07-08  add MINUTES; refactor
+//  0.2.1   2020-06-05  fix library.json
+//  0.2.0   2020-03-29  #pragma once, removed pre 1.0 support
+//  0.1.3   2017-07-16  TODO improved seconds - OdoMeter see below ... TODO 
+//  0.1.2   2017-07-16  added start(days, hours, minutes, seconds) + cont() == continue countdown
+//  0.1.1   2015-10-29  added start(h, m, s)
+//  0.1.0   2015-10-27  initial version
+
 
 #include "CountDown.h"
+
 
 CountDown::CountDown(const enum Resolution res)
 {
@@ -24,15 +26,17 @@ CountDown::CountDown(const enum Resolution res)
   stop();
 }
 
+
 void CountDown::setResolution(const enum Resolution res)
 {
   _res = res;
   _ticks = 0;
 }
 
-void CountDown::start(uint32_t ticks)
+
+bool CountDown::start(uint32_t ticks)
 {
-  _ticks = ticks;
+  uint32_t _ticks = ticks;
   _state = CountDown::RUNNING;
   if (_res == MICROS)
   {
@@ -42,29 +46,44 @@ void CountDown::start(uint32_t ticks)
   {
     _starttime = millis();
   }
+  returns true;  // can not overflow
 }
+
 
 void CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds)
 {
+  float _days = seconds / 86400.0 + minutes / 1440.0 + hours / 24.0 + days; 
+  bool rv = (_days > 49.7102696);
+
   uint32_t ticks = 86400UL * days + 3600UL * hours + 60UL * minutes + seconds;
   if (ticks > 4294967) ticks = 4294967;  // prevent underlying millis() overflow
   setResolution(SECONDS);
   start(ticks);
+
+  return rv;
 }
+
 
 void CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes)
 {
+  float _days = minutes / 1440.0 + hours / 24.0 + days; 
+  bool rv = (_days > 49.7102696);
+
   uint32_t ticks = 86400UL * days + 3600UL * hours + 60UL * minutes;
   if (ticks > 4294967) ticks = 4294967;  // prevent underlying millis() overflow
   setResolution(MINUTES);
   start(ticks);
+
+  return rv;
 }
+
 
 void CountDown::stop()
 {
   calcRemaining();
   _state = CountDown::STOPPED;
 }
+
 
 void CountDown::cont()
 {
@@ -74,12 +93,13 @@ void CountDown::cont()
   }
 }
 
+
 bool CountDown::isRunning() 
 {
-  if (_state == CountDown::STOPPED) return false;
-  if (remaining() == 0) return false;
-  return true;
+  calcRemaining();
+  return (_state == CountDown::RUNNING);
 }
+
 
 uint32_t CountDown::remaining()
 {
@@ -87,6 +107,7 @@ uint32_t CountDown::remaining()
   if (_remaining == 0) _state = CountDown::STOPPED;
   return _remaining;
 }
+
 
 void CountDown::calcRemaining()
 {
@@ -109,7 +130,7 @@ void CountDown::calcRemaining()
         t = millis() - _starttime;
         break;
     }
-    _remaining = _ticks > t ? _ticks - t: 0;
+    _remaining = _ticks > t ? _ticks - t : 0;
     if (_remaining == 0) 
     {
       _state = CountDown::STOPPED;
