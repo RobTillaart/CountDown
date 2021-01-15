@@ -50,7 +50,7 @@ bool CountDown::start(uint32_t ticks)
 }
 
 
-void CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds)
+bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds)
 {
   float _days = seconds / 86400.0 + minutes / 1440.0 + hours / 24.0 + days; 
   bool rv = (_days > 49.7102696);
@@ -64,7 +64,7 @@ void CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t s
 }
 
 
-void CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes)
+bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes)
 {
   float _days = minutes / 1440.0 + hours / 24.0 + days; 
   bool rv = (_days > 49.7102696);
