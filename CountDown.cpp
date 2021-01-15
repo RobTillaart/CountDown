@@ -36,7 +36,7 @@ void CountDown::setResolution(const enum Resolution res)
 
 bool CountDown::start(uint32_t ticks)
 {
-  uint32_t _ticks = ticks;
+  _ticks = ticks;
   _state = CountDown::RUNNING;
   if (_res == MICROS)
   {
