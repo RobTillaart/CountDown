@@ -13,6 +13,11 @@
 
 CountDown::CountDown(const enum Resolution res)
 {
+  //  _res = MILLIS;  //  set in setResolution
+  //  _ticks = 0;     //  set in setResolution
+  _state = CountDown::STOPPED;
+  _remaining = 0;
+  _startTime = 0;
   setResolution(res);
   stop();
 }

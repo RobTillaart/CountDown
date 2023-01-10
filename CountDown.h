@@ -47,9 +47,6 @@ private:
     enum Resolution _res;
     uint32_t        _starttime;
     void            calcRemaining();
-
-    //  for debug test overflow
-    //  uint32_t    _millis() { return millis() + 4294960000UL; };
 };
 
 

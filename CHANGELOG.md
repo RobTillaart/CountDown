@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - label enum resolution to be printable u, m, s, M.
 - add getUnits()
 - add isStopped() for convenience.
+- fix initialization of private variables.
 - update GitHub actions
 - update license
 - update readme.md
