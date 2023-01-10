@@ -42,11 +42,11 @@ bool CountDown::start(uint32_t ticks)
   _state = CountDown::RUNNING;
   if (_res == MICROS)
   {
-    _starttime = micros();
+    _startTime = micros();
   }
   else
   {
-    _starttime = millis();
+    _startTime = millis();
   }
   return true;  //  can not overflow
 }
@@ -132,17 +132,17 @@ void CountDown::calcRemaining()
     switch(_res)
     {
       case MINUTES:
-        t = (millis() - _starttime) / 60000UL;
+        t = (millis() - _startTime) / 60000UL;
         break;
       case SECONDS:
-        t = (millis() - _starttime) / 1000UL;;
+        t = (millis() - _startTime) / 1000UL;;
         break;
       case MICROS:
-        t = micros() - _starttime;
+        t = micros() - _startTime;
         break;
       case MILLIS:
       default:
-        t = millis() - _starttime;
+        t = millis() - _startTime;
         break;
     }
     _remaining = _ticks > t ? _ticks - t : 0;

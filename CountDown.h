@@ -45,7 +45,7 @@ private:
     uint32_t        _remaining;
     enum State      _state;
     enum Resolution _res;
-    uint32_t        _starttime;
+    uint32_t        _startTime;
     void            calcRemaining();
 };
 
