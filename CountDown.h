@@ -2,30 +2,32 @@
 //
 //    FILE: CountDown.h
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.7
+// VERSION: 0.3.0
 // PURPOSE: CountDown library for Arduino
 //     URL: https://github.com/RobTillaart/CountDown
-//
 
 
 #include "Arduino.h"
 
-#define COUNTDOWN_LIB_VERSION               (F("0.2.7"))
+#define COUNTDOWN_LIB_VERSION               (F("0.3.0"))
 
 
 class CountDown
 {
 public:
-    enum Resolution { MILLIS, MICROS, SECONDS, MINUTES };
+    enum Resolution { MICROS = 'u', MILLIS = 'm', SECONDS = 's', MINUTES = 'M' };
 
     explicit CountDown(const enum Resolution res = MILLIS);
 
     void     setResolution(const enum Resolution res = MILLIS);
+    enum     Resolution resolution() { return _res; };
+    char     getUnits();
 
+    //  one need to set the resolution before calling start(ticks).
     bool     start(uint32_t ticks);
-             // Implicit set resolution to SECONDS.
+    //  Implicit set resolution to SECONDS.
     bool     start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds);
-             // Implicit set resolution to MINUTES.
+    //  Implicit set resolution to MINUTES.
     bool     start(uint8_t days, uint16_t hours, uint32_t minutes);
 
     void     stop();
@@ -33,7 +35,8 @@ public:
 
     uint32_t remaining();
     bool     isRunning();
-    enum     Resolution resolution() const  { return _res; };
+    bool     isStopped();
+
 
 private:
     enum State { RUNNING, STOPPED };
@@ -44,7 +47,11 @@ private:
     enum Resolution _res;
     uint32_t        _starttime;
     void            calcRemaining();
+
+    //  for debug test overflow
+    //  uint32_t    _millis() { return millis() + 4294960000UL; };
 };
 
 
-// -- END OF FILE --
+//  -- END OF FILE --
+
