@@ -59,6 +59,7 @@ bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t s
 
   uint32_t ticks = 86400UL * days + 3600UL * hours + 60UL * minutes + seconds;
   //  prevent underlying millis() overflow
+  //  4294967 = number of SECONDS in 2^32 milliseconds
   if (ticks > 4294967) ticks = 4294967;
   setResolution(SECONDS);
   start(ticks);
@@ -74,7 +75,8 @@ bool CountDown::start(uint8_t days, uint16_t hours, uint32_t minutes)
 
   uint32_t ticks = 1440UL * days + 60UL * hours + minutes;
   //  prevent underlying millis() overflow
-  if (ticks > 4294967) ticks = 4294967;
+  //  71582 = number of MINUTES in 2^32 milliseconds
+  if (ticks > 71582) ticks = 71582;
   setResolution(MINUTES);
   start(ticks);
 

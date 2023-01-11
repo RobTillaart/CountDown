@@ -15,7 +15,7 @@ Arduino Library to implement a CountDown clock (in SW polling, no HW timer).
 
 The countdown library is a clock that counts down from a given time to zero.
 It does not call a function or so as the user is responsible to check the time remaining.
-Typically one checks the remaining time in every **loop()**.
+Typically one checks the remaining time at least once in every **loop()**.
 
 Under the hood the function uses **micros()** or **millis()** which results in a maximum time
 of 4294 seconds in micros (1h 10m) or about 49+ days when using milliseconds.
@@ -31,15 +31,20 @@ Interrupts etc might cause deviations.
 The main functions of the CountDown clock are:
 
 - **CountDown(const enum Resolution res = MILLIS)** constructor, with default resolution of milliseconds.
-- **void setResolution(const enum Resolution res = MILLIS)** set the resolution.
+- **void setResolution(const enum Resolution res = MILLIS)** set the resolution,
+default to MILLIS.
 - **enum Resolution resolution()** return the current resolution (integer).
 - **char getUnits()** return the current resolution as printable char (u,m,s,M)
 - **bool start(uint32_t ticks)** (re)start in current resolution.
-Typical used for MILLIS and MICROS.
+Typical used for MILLIS and MICROS which must be set manually.
 - **bool start(uint8_t days, uint16_t hours, uint32_t minutes, uint32_t seconds)** Implicit set resolution to SECONDS.
+Returns false if total exceeds 2^32 milliseconds ~49 days.
+Note that **remaining()** will report in SECONDS.
 - **bool start(uint8_t days, uint16_t hours, uint32_t minutes)** Implicit set resolution to MINUTES.
-- **void stop()** stop the count-down.
-- **void cont()** resumes / continue the count-down.
+Returns false if total exceeds 2^32 milliseconds ~49 days.
+Note that **remaining()** will report in MINUTES.
+- **void stop()** stop the count down.
+- **void cont()** resumes / continue the count down.
 *(note continue is a C-Keyword)*
 - **uint32_t remaining()** returns the remaining ticks in current resolution.
 - **bool isRunning()** idem.
@@ -50,15 +55,16 @@ These functions work straightforward.
 
 ## Operation
 
-The function **start(days, hours, minutes, seconds)** has changed its
-parameters type to minimize them, given that the total time may not exceed 2^32 milliseconds.
-This allows the user to call **start()** with e.g. 
+The function **start(days, hours, minutes, seconds)** allows all combinations
+as long as the total time may not exceed 2^32 milliseconds. 
+The function will return false if it exceeds this (rounded) maximum.
+Example calls are:
 - four hundred minutes **start(0, 0, 400, 0)** 
 - a million seconds **start(0, 0, 0, 1000000)** 
 - an unusual mix **start(0, 0, 400, 1000)** as parameter.
 Note: the resolution is implicitly set to **CountDown::SECONDS**.
 
-Since 0.2.4 the function **start()** will check if the parameters cause an overflow
+Since 0.2.4 all **start()** functions will check if the parameters cause an overflow
 in the underlying math. 
 - If there is no overflow, **start()** returns true. 
 - If there is an overflow, **start()** returns false.
@@ -130,8 +136,11 @@ the user must press a button at least once per minute to show he is still awake.
 - add examples
   - visualisations - hexadecimal - alphabetical (radix 26)
   - depends on sensor
+  - (semi)watchdog()
 - add resolution::HOURS + **start(days, hours)**
+  - extend adaptive display example
 - add call-back function when **0** is reached
+  - example
 
 
 #### wont (unless)

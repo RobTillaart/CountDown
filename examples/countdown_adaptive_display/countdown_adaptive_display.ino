@@ -34,7 +34,7 @@ void loop()
   Serial.print(" ");
   Serial.println(CD.getUnits());
 
-  //  switch units and poll frequency
+  //  switch units and poll frequency for last minute.
   if ((CD.remaining() == 1) && (CD.getUnits() == 'M'))
   {
     wait = 1000;
