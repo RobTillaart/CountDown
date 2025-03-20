@@ -14,7 +14,6 @@ CountDown CD;
 
 void setup()
 {
-{
   //  while(!Serial);  //  uncomment if needed
   Serial.begin(115200);
   Serial.println(__FILE__);
@@ -31,7 +30,7 @@ void setup()
 void loop()
 {
   static uint32_t last_remaining = 0;
-  if (last_remaining != CD.remaining() || CD.remaining() == 0 )
+  if ((last_remaining != CD.remaining()) || (CD.remaining() == 0) )
   {
     Serial.println();
     last_remaining = CD.remaining();
@@ -43,4 +42,3 @@ void loop()
 
 
 //  -- END OF FILE --
-

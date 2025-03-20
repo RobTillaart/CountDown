@@ -14,7 +14,6 @@ uint8_t lines = 0;
 
 void setup()
 {
-{
   //  while(!Serial);  //  uncomment if needed
   Serial.begin(115200);
   Serial.println(__FILE__);

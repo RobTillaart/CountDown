@@ -13,7 +13,6 @@ CountDown CD;
 
 void setup()
 {
-{
   //  while(!Serial);  //  uncomment if needed
   Serial.begin(115200);
   Serial.println(__FILE__);
